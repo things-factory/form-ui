@@ -172,11 +172,7 @@ class FormMaster extends LitElement {
       if (children.type === 'number') {
         data[children.name] = parseFloat(children.value)
       } else if (children.type === 'checkbox') {
-        try {
-          data[children.name] = JSON.parse(children.value)
-        } catch (e) {
-          data[children.name] = false
-        }
+        data[children.name] = children.checked
       } else {
         data[children.name] = children.value
       }

@@ -62,6 +62,14 @@ class CustomInput extends LitElement {
       : value
   }
 
+  get checked() {
+    return this.input.checked
+  }
+
+  set checked(checked) {
+    this.input.checked = checked
+  }
+
   firstUpdated() {
     this.dispatchEvent(new CustomEvent('load'))
   }
