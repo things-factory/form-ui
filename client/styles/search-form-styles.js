@@ -3,32 +3,22 @@ import { css } from 'lit-element'
 export const SearchFormStyles = css`
   :host {
     overflow: auto;
+    background-color: var(--search-form-background-color);
   }
 
   .search-form {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(24, 1fr);
     grid-gap: var(--form-grid-gap);
     grid-auto-rows: minmax(24px, auto);
-    max-width: 96%;
-    margin: var(--form-margin);
+    padding: var(--search-form-box-padding);
+    box-shadow: var(--search-form-box-shadow);
   }
-  .search-form fieldset {
-    display: contents;
-  }
-  .search-form legend {
-    grid-column: span 24;
-    text-transform: capitalize;
-
-    padding: var(--legend-padding);
-    font: var(--legend-font);
-    color: var(--legend-text-color);
-    border-bottom: var(--legend-border-bottom);
-  }
-
   .search-form label {
     grid-column: span 3;
     text-align: right;
+    align-self: center;
     text-transform: capitalize;
 
     color: var(--label-color);
@@ -36,9 +26,7 @@ export const SearchFormStyles = css`
   }
 
   .search-form input,
-  .search-form table,
-  .search-form select,
-  .search-form textarea {
+  .search-form select {
     grid-column: span 9;
 
     border: var(--input-field-border);
@@ -76,56 +64,57 @@ export const SearchFormStyles = css`
     margin: 0;
   }
 
+  mwc-icon {
+    position: absolute;
+    right: 1%;
+    bottom: 15px;
+    color: var(--search-form-icon-color);
+  }
+
   @media screen and (max-width: 400px) {
     .search-form {
-      max-width: 90%;
       grid-template-columns: repeat(12, 1fr);
-      grid-gap: 5px;
-    }
-    .search-form legend {
-      grid-column: span 12;
+      grid-gap: 10px 5px;
+      background-color: var(--search-form-narrow-background-color);
     }
     .search-form label {
-      grid-column: span 12;
-      text-align: left;
-      align-self: end;
+      grid-column: span 3;
+      padding-right: 5px;
+      align-self: center;
+      color: var(--search-form-narrow-text-color);
     }
     .search-form input,
-    .search-form table,
-    .search-form select,
-    .search-form textarea {
-      grid-column: span 12;
-      max-width: initial;
+    .search-form select {
+      grid-column: span 9;
+      max-width: 85%;
     }
     .search-form input[type='checkbox'],
     .search-form input[type='radio'] {
-      justify-self: left;
+      justify-self: end;
       align-self: center;
-      grid-column: span 1 / auto;
-      left: 0;
+      grid-column: span 3 / auto;
     }
 
     .search-form input[type='checkbox'] + label,
     .search-form input[type='radio'] + label {
-      grid-column: span 11 / auto;
+      grid-column: span 8 / auto;
       align-self: center;
       position: relative;
-      left: -25px;
+      left: 5px;
+      color: var(--search-form-narrow-text-color);
+    }
+    mwc-icon {
+      right: 3%;
+      color: var(--search-form-narrow-text-color);
     }
   }
 
   @media screen and (min-width: 1201px) and (max-width: 2000px) {
     .search-form {
       grid-template-columns: repeat(36, 1fr);
-      max-width: 98%;
-    }
-    .search-form legend {
-      grid-column: span 36;
     }
     .search-form input,
-    .search-form table,
-    .search-form select,
-    .search-form textarea {
+    .search-form select {
       max-width: 90%;
     }
   }
@@ -133,16 +122,13 @@ export const SearchFormStyles = css`
   @media screen and (min-width: 2001px) {
     .search-form {
       grid-template-columns: repeat(48, 1fr);
-      max-width: 98%;
-    }
-    .search-form legend {
-      grid-column: span 48;
     }
     .search-form input,
-    .search-form table,
-    .search-form select,
-    .search-form textarea {
+    .search-form select {
       max-width: 90%;
+    }
+    mwc-icon {
+      right: 0.8%;
     }
   }
 `

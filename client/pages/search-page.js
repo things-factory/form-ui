@@ -12,25 +12,23 @@ export class SearchPage extends LitElement {
   render() {
     return html`
       <form class="search-form">
-        <fieldset>
-          <label>a</label>
-          <input type="text" name="a" value="a" />
+        <label>a</label>
+        <input type="text" name="a" value="a" />
 
-          <label>b</label>
-          <input type="text" name="b" value="b" />
+        <label>b</label>
+        <input type="text" name="b" value="b" />
 
-          <label>c</label>
-          <input type="text" name="c" value="c" />
+        <label>c</label>
+        <input type="text" name="c" value="c" />
 
-          <label>d</label>
-          <input type="text" name="d" value="d" />
+        <label>d</label>
+        <input type="text" name="d" value="d" />
 
-          <label>e</label>
-          <input type="text" name="e" value="e" />
+        <label>e</label>
+        <input type="text" name="e" value="e" />
 
-          <input type="checkbox" name="f" value="f" />
-          <label>f</label>
-        </fieldset>
+        <input type="checkbox" name="f" value="f" />
+        <label>f</label>
 
         <mwc-icon @click=${e => this.submit()} search>search</mwc-icon>
       </form>
