@@ -1,3 +1,5 @@
+export * from './styles'
+
 export * from './components/custom-input'
 export * from './components/custom-select'
 export * from './components/form-master'
