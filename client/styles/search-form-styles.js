@@ -64,7 +64,7 @@ export const SearchFormStyles = css`
     margin: 0;
   }
 
-  mwc-icon {
+  [search] {
     position: absolute;
     right: 1%;
     bottom: 15px;
@@ -76,6 +76,9 @@ export const SearchFormStyles = css`
       grid-template-columns: repeat(12, 1fr);
       grid-gap: 10px 5px;
       background-color: var(--search-form-narrow-background-color);
+
+      max-height: 54px;
+      overflow-y: auto;
     }
     .search-form label {
       grid-column: span 3;
@@ -103,7 +106,8 @@ export const SearchFormStyles = css`
       left: 5px;
       color: var(--search-form-narrow-text-color);
     }
-    mwc-icon {
+
+    [search] {
       right: 3%;
       color: var(--search-form-narrow-text-color);
     }
@@ -127,7 +131,7 @@ export const SearchFormStyles = css`
     .search-form select {
       max-width: 90%;
     }
-    mwc-icon {
+    [search] {
       right: 0.8%;
     }
   }
