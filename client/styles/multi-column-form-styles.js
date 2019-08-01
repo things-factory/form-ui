@@ -31,6 +31,7 @@ export const MultiColumnFormStyles = css`
     grid-column: span 3;
     text-align: right;
     text-transform: capitalize;
+    align-self: center;
 
     color: var(--label-color);
     font: var(--label-font);
@@ -39,7 +40,8 @@ export const MultiColumnFormStyles = css`
   .multi-column-form input,
   .multi-column-form table,
   .multi-column-form select,
-  .multi-column-form textarea {
+  .multi-column-form textarea,
+  .multi-column-form [custom-input] {
     grid-column: span 9;
 
     border: var(--input-field-border);
@@ -94,7 +96,8 @@ export const MultiColumnFormStyles = css`
     .multi-column-form input,
     .multi-column-form table,
     .multi-column-form select,
-    .multi-column-form textarea {
+    .multi-column-form textarea,
+    .multi-column-form [custom-input] {
       grid-column: span 12;
       max-width: initial;
     }

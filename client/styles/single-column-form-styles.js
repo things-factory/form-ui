@@ -39,7 +39,8 @@ export const SingleColumnFormStyles = css`
   .single-column-form input,
   .single-column-form table,
   .single-column-form select,
-  .single-column-form textarea {
+  .single-column-form textarea,
+  .single-column-form [custom-input] {
     grid-column: span 8;
 
     border: var(--input-field-border);
@@ -88,7 +89,8 @@ export const SingleColumnFormStyles = css`
     .single-column-form input,
     .single-column-form table,
     .single-column-form select,
-    .single-column-form textarea {
+    .single-column-form textarea,
+    .single-column-form [custom-input] {
       grid-column: span 12;
     }
     .single-column-form input[type='checkbox'],
