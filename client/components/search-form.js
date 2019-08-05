@@ -115,6 +115,29 @@ class SearchForm extends LitElement {
     return Array.from(this.form.children)
   }
 
+  serialize() {
+    let data = {}
+    Array.from(this.form.children).forEach(children => {
+      if (children.type === 'number') {
+        data[children.name] = parseFloat(children.value)
+      } else if (children.type === 'checkbox') {
+        data[children.name] = children.checked
+      } else {
+        data[children.name] = children.value
+      }
+    })
+
+    return data
+  }
+
+  getSearchParams() {
+    let searchParam = new URLSearchParams()
+    const fields = this.getFields()
+    fields.forEach(field => searchParam.append(field.name, field.value))
+
+    return decodeURI(searchParam)
+  }
+
   submit() {
     this.dispatchEvent(new CustomEvent('submit'))
   }
