@@ -112,7 +112,7 @@ class SearchForm extends LitElement {
   }
 
   getFields() {
-    return Array.from(this.form.querySelector('input, select'))
+    return Array.from(this.form.querySelectorAll('input, select'))
   }
 
   serialize() {
