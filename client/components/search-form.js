@@ -51,7 +51,7 @@ class SearchForm extends LitElement {
                   <select .value=${field.value} .name=${field.name} ?hidden=${field.hidden}>
                     ${(field.options || []).map(
                       option => html`
-                        <option ?selected=${option.value == field.value}>${option.name}</option>
+                        <option ?selected=${option.value == field.value} value=${option.value}>${option.name}</option>
                       `
                     )}
                   </select>
@@ -63,7 +63,7 @@ class SearchForm extends LitElement {
                 `
               : html`
                   <label ?hidden=${field.hidden}>${field.name || field.id}</label>
-                  <input .type=${field.type} .value=${field.valu || ''} .name=${field.name} ?hidden=${field.hidden} />
+                  <input .type=${field.type} .value=${field.value || ''} .name=${field.name} ?hidden=${field.hidden} />
                 `}
           `
         )}
