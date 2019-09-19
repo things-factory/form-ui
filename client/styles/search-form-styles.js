@@ -36,6 +36,10 @@ export const SearchFormStyles = css`
     max-width: 85%;
   }
 
+  .search-form select {
+    max-width: 91%;
+  }
+
   .search-form input[type='checkbox'],
   .search-form input[type='radio'] {
     justify-self: end;
