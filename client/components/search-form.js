@@ -47,7 +47,7 @@ class SearchForm extends LitElement {
           field => html`
             ${field.type === 'select'
               ? html`
-                  <label ?hidden=${field.hidden}>${field.label || field.name || field.id}</label>
+                  <label ?hidden=${field.hidden}>${field.name || field.id}</label>
                   <select .value=${field.value} .name=${field.name} ?hidden=${field.hidden}>
                     ${(field.options || []).map(
                       option => html`
@@ -59,10 +59,10 @@ class SearchForm extends LitElement {
               : field.type === 'checkbox'
               ? html`
                   <input type="checkbox" .value=${field.value} .name=${field.name} ?hidden=${field.hidden} />
-                  <label ?hidden=${field.hidden}>${field.label || field.name || field.id}</label>
+                  <label ?hidden=${field.hidden}>${field.name || field.id}</label>
                 `
               : html`
-                  <label ?hidden=${field.hidden}>${field.label || field.name || field.id}</label>
+                  <label ?hidden=${field.hidden}>${field.name || field.id}</label>
                   <input .type=${field.type} .value=${field.value || ''} .name=${field.name} ?hidden=${field.hidden} />
                 `}
           `
