@@ -3,6 +3,7 @@ import { css } from 'lit-element'
 export const SingleColumnFormStyles = css`
   :host {
     overflow: auto;
+    padding: var(--form-container-padding);
   }
 
   .single-column-form {

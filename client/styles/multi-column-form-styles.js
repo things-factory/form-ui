@@ -3,6 +3,7 @@ import { css } from 'lit-element'
 export const MultiColumnFormStyles = css`
   :host {
     overflow: auto;
+    padding: var(--form-container-padding);
   }
 
   .multi-column-form {
