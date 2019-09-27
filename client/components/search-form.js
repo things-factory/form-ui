@@ -77,7 +77,7 @@ class SearchForm extends LitElement {
     if (changedProps.has('fields')) {
       this._checkInputValidity()
 
-      var formFields = this.getFields()
+      var formFields = this.formFields
       this.fields.forEach(field => {
         var formField = formFields.find(f => f.name == field.name)
         if (field.props instanceof Object && !Array.isArray(field.props)) {
@@ -111,8 +111,40 @@ class SearchForm extends LitElement {
     return this.shadowRoot.querySelector('form')
   }
 
+  get formFields() {
+    return Array.from(this.form.querySelectorAll('input, select'))
+  }
+
+  /* @deprecated */
   getFields() {
     return Array.from(this.form.querySelectorAll('input, select'))
+  }
+
+  get searchParams() {
+    let searchParam = new URLSearchParams()
+    const fields = this.formFields
+    fields.forEach(field => searchParam.append(field.name, field.value))
+
+    return decodeURI(searchParam)
+  }
+
+  get queryFilters() {
+    return this.formFields
+      .filter(field => (field.type !== 'checkbox' && field.value && field.value !== '') || field.type === 'checkbox')
+      .map(field => {
+        return {
+          name: field.name,
+          value:
+            field.type === 'text'
+              ? field.value
+              : field.type === 'checkbox'
+              ? field.checked
+              : field.type === 'number'
+              ? parseFloat(field.value)
+              : field.value,
+          operator: field.getAttribute('searchOper')
+        }
+      })
   }
 
   serialize() {
@@ -128,14 +160,6 @@ class SearchForm extends LitElement {
     })
 
     return data
-  }
-
-  getSearchParams() {
-    let searchParam = new URLSearchParams()
-    const fields = this.getFields()
-    fields.forEach(field => searchParam.append(field.name, field.value))
-
-    return decodeURI(searchParam)
   }
 
   submit() {

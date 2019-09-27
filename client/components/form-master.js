@@ -181,7 +181,7 @@ class FormMaster extends LitElement {
     return data
   }
 
-  getSearchParams() {
+  get searchParams() {
     let searchParam = new URLSearchParams()
     const data = this.serialize()
     const fields = this.getFields()
