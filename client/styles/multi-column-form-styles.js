@@ -12,7 +12,7 @@ export const MultiColumnFormStyles = css`
     grid-template-columns: repeat(24, 1fr);
     grid-gap: var(--form-grid-gap);
     grid-auto-rows: minmax(24px, auto);
-    max-width: 96%;
+    max-width: var(--form-multi-column-max-width);
     margin: var(--form-margin);
   }
   .multi-column-form fieldset {
