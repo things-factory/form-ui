@@ -82,7 +82,7 @@ export const MultiColumnFormStyles = css`
 
   @media screen and (max-width: 460px) {
     .multi-column-form {
-      max-width: 90%;
+      max-width: 100%;
       grid-template-columns: repeat(12, 1fr);
       grid-gap: 5px;
     }
