@@ -93,6 +93,12 @@ class SearchForm extends LitElement {
             formField.setAttribute(attr, '')
           })
         }
+
+        if (field.handlers instanceof Object && !Array.isArray(field.handlers)) {
+          for (let eventName in field.handlers) {
+            formField.addEventListener(eventName, field.handlers[eventName])
+          }
+        }
       })
     }
   }
