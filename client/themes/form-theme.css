@@ -1,0 +1,59 @@
+body {
+  --form-border: none;
+  --form-margin: 15px auto;
+  --form-max-width: 700px;
+  --form-multi-column-max-width: 100%;
+  --form-sublabel-font: normal 13px var(--theme-font);
+  --form-sublabel-color: var(--secondary-color);
+  --form-grid-gap: 12px 5px;
+
+  --legend-padding: var(--subtitle-padding);
+  --legend-font: var(--subtitle-font);
+  --legend-text-color: var(--subtitle-text-color);
+  --legend-border-bottom: var(--subtitle-border-bottom);
+
+  --label-padding: 3px 0;
+  --label-font: normal 14px var(--theme-font);
+  --label-color: var(--secondary-color);
+
+  --input-field-border: 1px solid rgba(0, 0, 0, 0.2);
+  --input-field-border-radius: var(--border-radius);
+  --input-field-padding: 2px 9px;
+  --input-field-font: normal 14px var(--theme-font);
+
+  --search-panel-background-color: rgba(0, 0, 0, 0.1);
+  --search-panel-search-iconbutton-size: var(--icon-default-size);
+  --search-form-icon-color: var(--primary-color);
+  --search-form-box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.15);
+  --search-form-box-padding: 15px 30px 15px 10px;
+  --search-form-background-color: #fff;
+  --search-form-narrow-background-color: rgba(34, 166, 167, 0.9);
+  --search-form-narrow-text-color: #fff;
+}
+
+@media only screen and (max-width: 460px) {
+  body {
+    --label-font: normal 15px var(--theme-font);
+    --input-field-font: normal 15px var(--theme-font);
+  }
+}
+
+@media (min-width: 461px) and (max-width: 1024px) {
+  body {
+    --form-margin: 15px 0;
+    --form-multi-column-max-width: 100%;
+    --form-container-padding: 0 9px 12px 9px;
+    --label-font: normal 14px var(--theme-font);
+    --input-field-font: normal 15px var(--theme-font);
+    --input-field-padding: 3px 5px;
+  }
+}
+
+@media only screen and (max-width: 925px) {
+  body {
+    --form-margin: 14px 0;
+    --form-multi-column-max-width: 100%;
+    --form-container-padding: 0 9px 12px 9px;
+    --input-field-padding: 3px 5px;
+  }
+}
