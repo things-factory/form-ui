@@ -26,7 +26,7 @@ export class FileUploader extends LitElement {
           color: var(--file-uploader-icon-color);
         }
 
-        :host[candrop] {
+        :host(.candrop) {
           background-color: var(--file-uploader-candrop-background-color);
         }
 
