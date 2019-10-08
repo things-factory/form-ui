@@ -130,7 +130,8 @@ export const MultiColumnFormStyles = css`
     .multi-column-form input,
     .multi-column-form table,
     .multi-column-form select,
-    .multi-column-form textarea {
+    .multi-column-form textarea,
+    .multi-column-form [custom-input] {
       max-width: 90%;
     }
   }
@@ -145,7 +146,8 @@ export const MultiColumnFormStyles = css`
     .multi-column-form input,
     .multi-column-form table,
     .multi-column-form select,
-    .multi-column-form textarea {
+    .multi-column-form textarea,
+    .multi-column-form [custom-input] {
       max-width: 90%;
     }
   }
