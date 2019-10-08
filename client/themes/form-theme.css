@@ -29,6 +29,23 @@ body {
   --search-form-background-color: #fff;
   --search-form-narrow-background-color: rgba(34, 166, 167, 0.9);
   --search-form-narrow-text-color: #fff;
+
+  --file-uploader-border: 1px solid rgba(0, 0, 0, 0.1);
+  --file-uploader-background-color: var(--main-section-background-color);
+  --file-uploader-font: normal 12px/20px var(--theme-font);
+  --file-uploader-color: var(--secondary-color);
+  --file-uploader-icon-color: var(--primary-color);
+  --file-uploader-candrop-background-color: #fffde9;
+  --file-uploader-label-padding: 3px 20px;
+  --file-uploader-label-border-radius: var(--border-radius);
+  --file-uploader-label-background-color: var(--secondary-color);
+  --file-uploader-label-font: normal 12px var(--theme-font);
+  --file-uploader-label-color: #fff;
+  --file-uploader-li-padding: 2px 5px 0px 5px;
+  --file-uploader-li-border-bottom: 1px dotted rgba(0, 0, 0, 0.1);
+  --file-uploader-li-icon-margin: 2px 0 2px 5px;
+  --file-uploader-li-icon-font: normal 15px var(--mdc-icon-font, 'Material Icons');
+  --file-uploader-li-icon-focus-color: var(--primary-color);
 }
 
 @media only screen and (max-width: 460px) {

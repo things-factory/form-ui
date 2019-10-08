@@ -8,12 +8,13 @@ export class FileUploader extends LitElement {
         :host {
           border-radius: var(--border-radius);
           text-align: center;
-          border: 1px solid rgba(0, 0, 0, 0.1);
-          background-color: #f4f7fb;
           padding-bottom: 5px !important;
-          font: normal 12px/20px var(--theme-font) !important;
-          color: var(--secondary-color);
           text-transform: capitalize;
+
+          border: var(--file-uploader-border);
+          background-color: var(--main-section-background-color);
+          font: var(--file-uploader-font) !important;
+          color: var(--file-uploader-color);
         }
 
         :host > * {
@@ -22,11 +23,11 @@ export class FileUploader extends LitElement {
         }
 
         :host > mwc-icon {
-          color: var(--primary-color);
+          color: var(--file-uploader-icon-color);
         }
 
         :host[candrop] {
-          background-color: tomato;
+          background-color: var(--file-uploader-candrop-background-color);
         }
 
         #input-file {
@@ -35,14 +36,15 @@ export class FileUploader extends LitElement {
 
         label {
           position: relative;
-          padding: 3px 20px;
           width: 150px;
           border: none;
-          border-radius: var(--border-radius);
-          background-color: var(--secondary-color);
-          color: #fff;
-          font: normal 12px var(--theme-font) !important;
           text-transform: capitalize;
+
+          padding: var(--file-uploader-label-padding);
+          border-radius: var(--file-uploader-label-border-radius);
+          background-color: var(--file-uploader-label-background-color);
+          color: var(--file-uploader-label-color);
+          font: var(--file-uploader-label-font) !important;
         }
 
         ul {
@@ -51,19 +53,20 @@ export class FileUploader extends LitElement {
           padding: 0;
         }
         li {
-          padding: 2px 5px 0px 5px;
-          border-bottom: 1px dotted rgba(0, 0, 0, 0.1);
           text-align: left;
+
+          padding: var(--file-uploader-li-padding);
+          border-bottom: var(--file-uploader-li-border-bottom);
         }
         li mwc-icon {
-          margin: 2px 0 2px 5px;
           float: right;
-          font: normal 15px var(--mdc-icon-font, 'Material Icons');
           cursor: pointer;
+          font: var(--file-uploader-li-icon-font);
+          margin: var(--file-uploader-li-icon-margin);
         }
         li mwc-icon:hover,
         li mwc-icon:active {
-          color: var(--primary-color);
+          color: var(--file-uploader-li-icon-focus-color);
         }
       `
     ]
