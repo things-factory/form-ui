@@ -142,6 +142,11 @@ export class FileUploader extends LitElement {
   get files() {
     return this._files
   }
+
+  reset() {
+    this.fileInput.value = ''
+    this._files = []
+  }
 }
 
 customElements.define('file-uploader', FileUploader)
