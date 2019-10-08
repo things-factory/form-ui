@@ -127,7 +127,7 @@ export class FileUploader extends LitElement {
   firstUpdated() {
     FileDropHelper.set(this)
 
-    this.addEventListener('attachment-dropped', e => {
+    this.addEventListener('file-drop', e => {
       this._files = this.multiple ? e.detail : e.detail[0] ? [e.detail[0]] : []
     })
   }
