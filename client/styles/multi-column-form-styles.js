@@ -51,6 +51,10 @@ export const MultiColumnFormStyles = css`
     font: var(--input-field-font);
     max-width: 85%;
   }
+  .multi-column-form select {
+    min-height: 25px;
+    max-width: calc(85% + 18px);
+  }
 
   .multi-column-form input[type='checkbox'],
   .multi-column-form input[type='radio'] {
@@ -118,7 +122,11 @@ export const MultiColumnFormStyles = css`
       left: -25px;
     }
   }
-
+  @media (min-width: 461px) and (max-width: 1024px) {
+    .multi-column-form select {
+      max-width: calc(85% + 10px);
+    }
+  }
   @media screen and (min-width: 1201px) and (max-width: 2000px) {
     .multi-column-form {
       grid-template-columns: repeat(36, 1fr);
@@ -133,6 +141,9 @@ export const MultiColumnFormStyles = css`
     .multi-column-form textarea,
     .multi-column-form [custom-input] {
       max-width: 90%;
+    }
+    .multi-column-form select {
+      max-width: calc(90% + 18px);
     }
   }
   @media screen and (min-width: 2001px) {
@@ -149,6 +160,9 @@ export const MultiColumnFormStyles = css`
     .multi-column-form textarea,
     .multi-column-form [custom-input] {
       max-width: 90%;
+    }
+    .multi-column-form select {
+      max-width: calc(90% + 18px);
     }
   }
 `

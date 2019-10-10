@@ -13,7 +13,7 @@ export const SearchFormStyles = css`
     grid-gap: var(--form-grid-gap);
     grid-auto-rows: minmax(24px, auto);
     padding: var(--search-form-box-padding);
-    box-shadow: var(--search-form-box-shadow);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
   .search-form label {
     grid-column: span 3;
@@ -37,7 +37,8 @@ export const SearchFormStyles = css`
   }
 
   .search-form select {
-    max-width: 91%;
+    min-height: 25px;
+    max-width: calc(85% + 18px);
   }
 
   .search-form input[type='checkbox'],
@@ -116,7 +117,11 @@ export const SearchFormStyles = css`
       color: var(--search-form-narrow-text-color);
     }
   }
-
+  @media (min-width: 461px) and (max-width: 1024px) {
+    .search-form select {
+      max-width: calc(85% + 10px);
+    }
+  }
   @media screen and (min-width: 1201px) and (max-width: 2000px) {
     .search-form {
       grid-template-columns: repeat(36, 1fr);
@@ -124,6 +129,9 @@ export const SearchFormStyles = css`
     .search-form input,
     .search-form select {
       max-width: 90%;
+    }
+    .search-form select {
+      max-width: calc(90% + 18px);
     }
   }
 
@@ -134,6 +142,9 @@ export const SearchFormStyles = css`
     .search-form input,
     .search-form select {
       max-width: 90%;
+    }
+    .search-form select {
+      max-width: calc(90% + 18px);
     }
     [search] {
       right: 0.8%;
