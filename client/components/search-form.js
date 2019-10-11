@@ -39,6 +39,7 @@ class SearchForm extends LitElement {
         class="search-form"
         @keypress=${e => {
           if (e.keyCode === 13) {
+            e.preventDefault()
             this.submit()
           }
         }}
