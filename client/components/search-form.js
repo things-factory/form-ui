@@ -139,16 +139,18 @@ class SearchForm extends LitElement {
     return this.formFields
       .filter(field => (field.type !== 'checkbox' && field.value && field.value !== '') || field.type === 'checkbox')
       .map(field => {
+        const operator = field.getAttribute('searchOper')
+        const value = operator.indexOf('like') >= 0 ? `%${field.value}%` : field.value
         return {
           name: field.name,
           value:
             field.type === 'text'
-              ? field.value
+              ? value
               : field.type === 'checkbox'
               ? field.checked
               : field.type === 'number'
-              ? parseFloat(field.value)
-              : field.value,
+              ? parseFloat(value)
+              : value,
           operator: field.getAttribute('searchOper')
         }
       })
