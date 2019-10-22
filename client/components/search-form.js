@@ -65,10 +65,10 @@ class SearchForm extends LitElement {
               ? html`
                   <label ?hidden=${field.hidden}>${field.label || field.name || field.id}</label>
                   <input
-                    .type="${field.type}"
+                    .type=${field.type}
                     .value=${field.value || ''}
                     .name=${field.name}
-                    .field="${field.field || 'name'}"
+                    .field="${field.field}"
                     .queryName="${field.queryName}"
                     ?hidden=${field.hidden}
                   />
@@ -146,7 +146,28 @@ class SearchForm extends LitElement {
     return decodeURI(searchParam)
   }
 
-  async queryFilters() {
+  get queryFilters() {
+    return this.formFields
+      .filter(field => (field.type !== 'checkbox' && field.value && field.value !== '') || field.type === 'checkbox')
+      .map(field => {
+        const operator = field.getAttribute('searchOper')
+        const value = operator.indexOf('like') >= 0 ? `%${field.value}%` : field.value
+        return {
+          name: field.name,
+          value:
+            field.type === 'text'
+              ? value
+              : field.type === 'checkbox'
+              ? field.checked
+              : field.type === 'number'
+              ? parseFloat(value)
+              : value,
+          operator: field.getAttribute('searchOper')
+        }
+      })
+  }
+
+  async getQueryFilters() {
     return await Promise.all(
       this.formFields
         .filter(field => (field.type !== 'checkbox' && field.value && field.value !== '') || field.type === 'checkbox')
@@ -174,10 +195,9 @@ class SearchForm extends LitElement {
 
   async _getResourceIds(inputField) {
     const value = inputField.value
-    if (!value) return
-
-    const queryName = inputField.queryName
     const field = inputField.field
+    const queryName = inputField.queryName
+
     const response = await client.query({
       query: gql`
         query {
@@ -199,9 +219,9 @@ class SearchForm extends LitElement {
     })
 
     if (!response.errors) {
-      const result = response.data[queryName].items.map(item => item.id)
-      if (result && result.length) {
-        return result
+      const items = response.data[queryName].items
+      if (items && items.length) {
+        return items.map(item => item.id)
       } else {
         return [null]
       }
