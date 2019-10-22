@@ -1,9 +1,8 @@
-import { LitElement, html, css } from 'lit-element'
-
 import '@material/mwc-icon'
-
+import { client, gqlBuilder } from '@things-factory/shell'
+import gql from 'graphql-tag'
+import { css, html, LitElement } from 'lit-element'
 import { SearchFormStyles } from '../styles/search-form-styles'
-
 import './custom-input'
 import './custom-select'
 
@@ -61,6 +60,18 @@ class SearchForm extends LitElement {
               ? html`
                   <input type="checkbox" .value=${field.value} .name=${field.name} ?hidden=${field.hidden} />
                   <label ?hidden=${field.hidden}>${field.label || field.name || field.id}</label>
+                `
+              : field.type === 'object'
+              ? html`
+                  <label ?hidden=${field.hidden}>${field.label || field.name || field.id}</label>
+                  <input
+                    .type="${field.type}"
+                    .value=${field.value || ''}
+                    .name=${field.name}
+                    .field="${field.field || 'name'}"
+                    .queryName="${field.queryName}"
+                    ?hidden=${field.hidden}
+                  />
                 `
               : html`
                   <label ?hidden=${field.hidden}>${field.label || field.name || field.id}</label>
@@ -135,25 +146,66 @@ class SearchForm extends LitElement {
     return decodeURI(searchParam)
   }
 
-  get queryFilters() {
-    return this.formFields
-      .filter(field => (field.type !== 'checkbox' && field.value && field.value !== '') || field.type === 'checkbox')
-      .map(field => {
-        const operator = field.getAttribute('searchOper')
-        const value = operator.indexOf('like') >= 0 ? `%${field.value}%` : field.value
-        return {
-          name: field.name,
-          value:
-            field.type === 'text'
-              ? value
-              : field.type === 'checkbox'
-              ? field.checked
-              : field.type === 'number'
-              ? parseFloat(value)
-              : value,
-          operator: field.getAttribute('searchOper')
+  async queryFilters() {
+    return await Promise.all(
+      this.formFields
+        .filter(field => (field.type !== 'checkbox' && field.value && field.value !== '') || field.type === 'checkbox')
+        .map(async field => {
+          const name = field.name
+          const operator = field.type === 'text' && field.field ? 'in' : field.getAttribute('searchOper')
+          const value = operator.indexOf('like') >= 0 ? `%${field.value}%` : field.value
+          return {
+            name,
+            operator,
+            value:
+              field.type === 'text' && field.field
+                ? await this._getResourceIds(field)
+                : field.type === 'text'
+                ? value
+                : field.type === 'checkbox'
+                ? field.checked
+                : field.type === 'number'
+                ? parseFloat(value)
+                : value
+          }
+        })
+    )
+  }
+
+  async _getResourceIds(inputField) {
+    const value = inputField.value
+    if (!value) return
+
+    const queryName = inputField.queryName
+    const field = inputField.field
+    const response = await client.query({
+      query: gql`
+        query {
+          ${queryName}(${gqlBuilder.buildArgs({
+        filters: [
+          {
+            name: field,
+            operator: 'i_like',
+            value: `%${value}%`
+          }
+        ]
+      })}) {
+            items {
+              id
+            }
+          }
         }
-      })
+      `
+    })
+
+    if (!response.errors) {
+      const result = response.data[queryName].items.map(item => item.id)
+      if (result && result.length) {
+        return result
+      } else {
+        return [null]
+      }
+    }
   }
 
   serialize() {
