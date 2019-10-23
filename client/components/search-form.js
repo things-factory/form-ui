@@ -58,8 +58,36 @@ class SearchForm extends LitElement {
                 `
               : field.type === 'checkbox'
               ? html`
-                  <input type="checkbox" .value=${field.value} .name=${field.name} ?hidden=${field.hidden} />
-                  <label ?hidden=${field.hidden}>${field.label || field.name || field.id}</label>
+                  <input
+                    id="ckbx_${field.name}"
+                    type="checkbox"
+                    ?checked="${field.value}"
+                    .name=${field.name}
+                    ?hidden=${field.hidden}
+                    @click="${e => {
+                      if (e.currentTarget.hasAttribute('indeterminate')) {
+                        const checkbox = e.currentTarget
+                        const values = [undefined, 'on', 'off']
+                        const currentValue = checkbox._value
+                        const newValue =
+                          values.indexOf(currentValue) + 1 > values.length - 1
+                            ? values[0]
+                            : values[values.indexOf(currentValue) + 1]
+
+                        if (newValue === 'on') {
+                          checkbox.checked = true
+                        } else if (newValue === 'off') {
+                          checkbox.checkbox = false
+                        } else {
+                          checkbox.indeterminate = true
+                        }
+                        checkbox._value = newValue
+                      }
+                    }}"
+                  />
+                  <label for="ckbx_${field.name}" ?hidden=${field.hidden}
+                    >${field.label || field.name || field.id}</label
+                  >
                 `
               : field.type === 'object'
               ? html`
@@ -102,6 +130,7 @@ class SearchForm extends LitElement {
 
         if (field.attrs && Array.isArray(field.attrs)) {
           field.attrs.forEach(attr => {
+            if (attr === 'indeterminate') formField.indeterminate = true
             formField.setAttribute(attr, '')
           })
         }
@@ -148,21 +177,30 @@ class SearchForm extends LitElement {
 
   get queryFilters() {
     return this.formFields
-      .filter(field => (field.type !== 'checkbox' && field.value && field.value !== '') || field.type === 'checkbox')
+      .filter(
+        field =>
+          (field.type !== 'checkbox' && field.value && field.value !== '') ||
+          (field.type === 'checkbox' && !field.hasAttribute('indeterminate')) ||
+          (field.type === 'checkbox' && field.hasAttribute('indeterminate') && field._value)
+      )
       .map(field => {
         const operator = field.getAttribute('searchOper')
-        const value = operator.indexOf('like') >= 0 ? `%${field.value}%` : field.value
+        let value = operator.indexOf('like') >= 0 ? `%${field.value}%` : field.value
         return {
           name: field.name,
           value:
             field.type === 'text'
               ? value
               : field.type === 'checkbox'
-              ? field.checked
+              ? field.hasAttribute('indeterminate')
+                ? field._value === 'on'
+                  ? true
+                  : false
+                : field.checked
               : field.type === 'number'
               ? parseFloat(value)
               : value,
-          operator: field.getAttribute('searchOper')
+          operator
         }
       })
   }
@@ -170,12 +208,17 @@ class SearchForm extends LitElement {
   async getQueryFilters() {
     return await Promise.all(
       this.formFields
-        .filter(field => (field.type !== 'checkbox' && field.value && field.value !== '') || field.type === 'checkbox')
+        .filter(
+          field =>
+            (field.type !== 'checkbox' && field.value && field.value !== '') ||
+            (field.type === 'checkbox' && !field.hasAttribute('indeterminate')) ||
+            (field.type === 'checkbox' && field.hasAttribute('indeterminate') && field._value)
+        )
         .map(async field => {
           const name = field.name
           const operator = field.type === 'text' && field.field ? 'in' : field.getAttribute('searchOper')
           const value = operator.indexOf('like') >= 0 ? `%${field.value}%` : field.value
-          return {
+          const filter = {
             name,
             operator,
             value:
@@ -184,11 +227,17 @@ class SearchForm extends LitElement {
                 : field.type === 'text'
                 ? value
                 : field.type === 'checkbox'
-                ? field.checked
+                ? field.hasAttribute('indeterminate')
+                  ? field._value === 'on'
+                    ? true
+                    : false
+                  : field.checked
                 : field.type === 'number'
                 ? parseFloat(value)
                 : value
           }
+          console.log(filter)
+          return filter
         })
     )
   }
