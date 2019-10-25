@@ -222,7 +222,7 @@ class SearchForm extends LitElement {
             name,
             operator,
             value:
-              field.type === 'text' && field.field
+              field.type === 'text' && field.getAttribute('type') === 'object'
                 ? await this._getResourceIds(field)
                 : field.type === 'text'
                 ? value
@@ -244,7 +244,7 @@ class SearchForm extends LitElement {
 
   async _getResourceIds(inputField) {
     const value = inputField.value
-    const field = inputField.field
+    const field = inputField.field || 'name'
     const queryName = inputField.queryName
 
     const response = await client.query({
