@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit-element'
-import { FileDropHelper } from '@things-factory/shell'
+import { FileDropHelper } from '@things-factory/utils'
 
 export class FileUploader extends LitElement {
   static get styles() {

@@ -1,5 +1,6 @@
 import '@material/mwc-icon'
-import { client, gqlBuilder } from '@things-factory/shell'
+import { client } from '@things-factory/shell'
+import { gqlBuilder } from '@things-factory/utils'
 import gql from 'graphql-tag'
 import { css, html, LitElement } from 'lit-element'
 import { SearchFormStyles } from '../styles/search-form-styles'
