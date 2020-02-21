@@ -235,9 +235,9 @@ class SearchForm extends LitElement {
                   : field.checked
                 : field.type === 'number'
                 ? parseFloat(value)
-                : value
+                : value,
+            relation: field.type === 'text' && field.getAttribute('type') === 'object'
           }
-          console.log(filter)
           return filter
         })
     )
