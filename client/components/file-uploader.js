@@ -93,7 +93,8 @@ export class FileUploader extends LitElement {
         ?multiple=${this.multiple}
         hidden
         @change=${e => {
-          this._files = Array.from(e.currentTarget.files)
+          const fileInput = e.currentTarget
+          this._files = Array.from(fileInput.files)
 
           this.dispatchEvent(
             new CustomEvent('files-change', {
@@ -104,6 +105,8 @@ export class FileUploader extends LitElement {
               }
             })
           )
+
+          fileInput.value = null
         }}
       />
       <label for="input-file">${this.label || 'select file'}</label>
