@@ -34,8 +34,8 @@ export const SearchFormStyles = css`
     padding: var(--input-field-padding);
     font: var(--input-field-font);
     max-width: 85%;
-    color: var(--input-field-color, #000)
-    background-color: var(--input-field-background-color, #fff)
+    color: var(--input-field-color)
+    background-color: var(--input-field-background-color)
   }
 
   .search-form select {
