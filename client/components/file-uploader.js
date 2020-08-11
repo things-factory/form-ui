@@ -36,7 +36,7 @@ export class FileUploader extends LitElement {
 
         label {
           position: relative;
-          width: 150px;
+          width: auto;
           border: none;
           text-transform: capitalize;
 
