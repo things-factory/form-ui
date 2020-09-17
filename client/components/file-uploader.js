@@ -17,7 +17,7 @@ export class FileUploader extends LitElement {
           color: var(--file-uploader-color);
         }
 
-        :host > * {
+        :host > *:not(style) {
           display: block;
           margin: auto;
         }
